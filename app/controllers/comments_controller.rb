@@ -1,13 +1,14 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_post, except: [:edit, :update, :destroy]
 
   def new
-    @comm = @post.comments.new
+    @comm = @post.user.comments.new
+    authorize @comm
   end
 
   def create
     @comm = @post.comments.new approved_params
+    authorize @comm
     if @post.save
       flash[:notice] = "Comment created!"
       redirect_to @post
@@ -16,16 +17,14 @@ class CommentsController < ApplicationController
     end
   end
 
-  def show
-
-  end
-
   def edit
     @comm = Comment.find params[:id]
+    authorize @comm
   end
 
   def update
     @comm = Comment.find params[:id]
+    authorize @comm
     if @comm.update approved_params
       flash[:notice] = "Comment updated!"
       redirect_to @comm.message
@@ -36,6 +35,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comm = Comment.find params[:id]
+    authorize @comm
     if @comm.delete
       flash[:notice] = "Post deleted!"
       redirect_to @comm.message

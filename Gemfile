@@ -18,6 +18,7 @@ gem 'twitter-bootstrap-rails'
 gem 'bootstrap_form'
 gem 'rails-erd'
 gem 'devise'
+gem 'pundit'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

@@ -1,16 +1,19 @@
 class SubbluditsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  skip_before_action :authenticate_user!, only: [:index]
 
   def index
     @subs = Subbludit.all
+    authorize @subs
   end
 
   def new
     @sub = Subbludit.new
+    authorize @sub
   end
 
   def create
     @sub = Subbludit.new(name: params[:subbludit][:name])
+    authorize @sub
     if @sub.save
       flash[:notice] = "Subbludit created!"
       redirect_to @sub
@@ -21,6 +24,7 @@ class SubbluditsController < ApplicationController
 
   def show
     @sub = Subbludit.find params[:id]
+    authorize @sub
   end
 
 end

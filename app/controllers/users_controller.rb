@@ -1,18 +1,37 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, :set_user
+  before_action :set_user, except: [:destroy, :index, :edit]
 
   def show
+    authorize @user
+  end
+
+  def index
+    @users = User.all
   end
 
   def edit
+    raise
   end
 
   def update
+    authorize @user
     if @user.update approved_params
       flash[:notice] = "Screen name updated!"
       redirect_to @user
     else
       render :edit
+    end
+  end
+
+  def destroy
+    @user = User.find params[:id]
+    authorize @user
+    if @user.delete
+      flash[:notice] = "User deleted!"
+      render :index
+    else
+      flash[:notice] = "Could not delete User!"
+      render :index
     end
   end
 
