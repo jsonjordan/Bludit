@@ -1,4 +1,11 @@
 <h2>Welcome <%= @user.name ||= @user.email %></h2>
+<% if current_user.name == "JJ"%>
+  <%= image_tag "jasonfuturama.JPG" %>
+<% end %>
+<div>
+  <ul>
+  </ul>
+</div>
 
 <p>What would you like to do?</p>
 
@@ -15,7 +22,7 @@
 <h4>Your Posts</h4>
 <% @user.messages.each do |mes| %>
   <div class="panel panel-default">
-    <div class="panel-heading"><%= mes.title %>&emsp;-from-&emsp;<%= mes.subbludit.name %></div>
+    <div class="panel-heading"><%= mes.subbludit.name %>&emsp;---&emsp;<%= mes.title %></div>
     <div class="panel-body"><%= mes.content %></div>
     <div class="panel-footer"> on <%= (mes.updated_at.in_time_zone('Eastern Time (US & Canada)')).strftime("%B %-d %Y - %I:%M%p EST")%>&emsp;
       <%= link_to "Edit Post", edit_message_path(mes.id), class: "btn btn-default"%>&emsp;
