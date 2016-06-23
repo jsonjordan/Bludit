@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :messages
   has_many :comments
+  has_many :votes
 
   validates_uniqueness_of :name
 end
