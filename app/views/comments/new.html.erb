@@ -1,0 +1,20 @@
+<%= link_to "Back to #{@post.title}", message_path(@post), class: "btn btn-default"%>
+<div>
+  <ul>
+  </ul>
+</div>
+<h3>Post</h3>
+<div class="panel panel-default">
+  <div class="panel-heading">Title: <%= @post.title %></div>
+  <div class="panel-body">Content: <%= @post.content %></div>
+  <div class="panel-footer"><font color="blue"><%= @post.user.name ||= @post.user.email %></font> posted on
+    <%= (@post.updated_at.in_time_zone('Eastern Time (US & Canada)')).strftime("%B %-d %Y - %I:%M%p EST")%></div>
+</div>
+
+<h4>Make a comment</h4>
+<%= bootstrap_form_for @comm, url: message_comments_path(@post) do |f| %>
+  <%= f.text_area :content %>
+  <%= f.hidden_field :user_id, value: current_user.id%>
+  <%= f.hidden_field :message_id, value: @post.id%>
+  <button class="btn btn-primary">Submit</button>
+<% end %>

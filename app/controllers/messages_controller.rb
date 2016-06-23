@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_sub, except: [:destroy, :new, :edit, :update]
+  before_action :set_sub, except: [:destroy, :new, :edit, :update, :show]
 
 
   def new
@@ -41,6 +41,10 @@ class MessagesController < ApplicationController
     else
       render "subbludit/show"
     end
+  end
+
+  def show
+    @post = Message.find(params[:id])
   end
 
 

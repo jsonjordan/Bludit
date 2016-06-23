@@ -1,0 +1,5 @@
+<h4>Edit your comment in <%= @comm.message.title %></h4>
+<%= bootstrap_form_for @comm, url: comment_path(@comm), method: :patch do |f| %>
+  <%= f.text_area :content %>
+  <button class="btn btn-primary">Edit</button>
+<% end %>

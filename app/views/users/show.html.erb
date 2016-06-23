@@ -17,11 +17,10 @@
   <div class="panel panel-default">
     <div class="panel-heading"><%= mes.title %>&emsp;-from-&emsp;<%= mes.subbludit.name %></div>
     <div class="panel-body"><%= mes.content %></div>
-    <div class="panel-footer"> on <%= (mes.updated_at.in_time_zone('Eastern Time (US & Canada)')).strftime("%B %-d %Y - %I:%M%p EST")%>
-      <% if mes.user == current_user %>&emsp;
-        <%= link_to "Edit Post", edit_message_path(mes.id), class: "btn btn-default"%>&emsp;
-        <%= link_to "Delete Post", message_path(mes.id), method: :delete, class: "btn btn-default"%>
-      <% end %>
+    <div class="panel-footer"> on <%= (mes.updated_at.in_time_zone('Eastern Time (US & Canada)')).strftime("%B %-d %Y - %I:%M%p EST")%>&emsp;
+      <%= link_to "Edit Post", edit_message_path(mes.id), class: "btn btn-default"%>&emsp;
+      <%= link_to "Delete Post", message_path(mes.id), method: :delete, class: "btn btn-default"%>&emsp;
+      <%= link_to "Go To Post", message_path(mes.id), class: "btn btn-default"%>
     </div>
   </div>
 <% end %>

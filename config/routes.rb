@@ -61,7 +61,9 @@ Rails.application.routes.draw do
   resources :users
 
   resources :subbludits do
-      resources :messages, except: [:index], shallow: true
+    resources :messages, except: [:index], shallow: true do
+      resources :comments, shallow: true
+    end
   end
   resources :votes, except: [:index, :new, :edit, :show]
 
