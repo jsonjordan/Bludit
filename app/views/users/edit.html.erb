@@ -1,0 +1,5 @@
+<h4>Add/Change your screen name</h4>
+<%= bootstrap_form_for @user, url: user_path, method: :patch do |f| %>
+  <%= f.text_field :name, label: "Screen Name" %>
+  <button class="btn btn-primary">Submit</button>
+<% end %>

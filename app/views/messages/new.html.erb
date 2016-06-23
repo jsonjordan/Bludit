@@ -1,0 +1,8 @@
+<h4>Make a post in <%= @sub.name %></h4>
+<%= bootstrap_form_for @post, url: subbludit_messages_path(@sub) do |f| %>
+  <%= f.text_field :title %>
+  <%= f.text_area :content %>
+  <%= f.hidden_field :user_id, value: current_user.id%>
+  <%= f.hidden_field :subbludit_id, value: @sub.id%>
+  <button class="btn btn-primary">Submit</button>
+<% end %>

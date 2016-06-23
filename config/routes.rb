@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   root "subbludits#index"
+
+  get "users/picture" => "users#picture"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -57,8 +59,10 @@ Rails.application.routes.draw do
   #   end
 
   resources :users
-  resources :messages
-  resources :subbludits
+
+  resources :subbludits do
+      resources :messages, except: [:index], shallow: true
+  end
   resources :votes, except: [:index, :new, :edit, :show]
 
 

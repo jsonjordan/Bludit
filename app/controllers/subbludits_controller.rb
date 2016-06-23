@@ -6,10 +6,11 @@ class SubbluditsController < ApplicationController
   end
 
   def new
+    @sub = Subbludit.new
   end
 
   def create
-    @sub = Subbludit.new(name: params[:subbludits][:name])
+    @sub = Subbludit.new(name: params[:subbludit][:name])
     if @sub.save
       flash[:notice] = "Subbludit created!"
       redirect_to @sub
