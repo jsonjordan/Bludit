@@ -2,6 +2,6 @@
 <%= bootstrap_form_for @user, url: user_path, method: :patch do |f| %>
   <%= f.text_field :name %>
   <%= f.email_field :email %>
-  <%= f.text_field :permission %>
+  <%= f.select :permission, [["admin", "admin"], ["mod", "mod"], ["user", "user"]], { label: "Choose the users permission level:" }, { class: "selectpicker" } %>
   <button class="btn btn-primary">Submit</button>
 <% end %>
