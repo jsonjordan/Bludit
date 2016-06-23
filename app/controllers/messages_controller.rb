@@ -20,7 +20,7 @@ class MessagesController < ApplicationController
   end
 
   def edit
-    @post = current_user.messages.find(params[:id])
+    @post = Messages.find(params[:id])
     @sub = @post.subbludit
     authorize @post
   end

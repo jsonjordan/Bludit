@@ -11,6 +11,10 @@ class UserPolicy < ApplicationPolicy
     is_admin?
   end
 
+  def update?
+    is_admin?
+  end
+
   private
 
   def is_admin?

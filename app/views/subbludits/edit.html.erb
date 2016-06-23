@@ -1,0 +1,5 @@
+<h4>Edit <%= @sub.name %></h4>
+<%= bootstrap_form_for @sub  do |f| %>
+  <%= f.text_field :name %>
+  <button class="btn btn-primary">Submit</button>
+<% end %>

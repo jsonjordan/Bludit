@@ -27,4 +27,38 @@ class SubbluditsController < ApplicationController
     authorize @sub
   end
 
+  def edit
+    @sub = Subbludit.find params[:id]
+    authorize @sub
+  end
+
+  def update
+    @sub = Subbludit.find params[:id]
+    authorize @sub
+    if @sub.update approved_params
+      flash[:notice] = "Subbludit was updated!"
+      redirect_to subbludits_path
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @sub = Subbludit.find params[:id]
+    authorize @sub
+    if @sub.delete
+      flash[:notice] = "Subbludit deleted!"
+      redirect_to subbludits_path
+    else
+      flash[:notice] = "Could not delete Subbludit!"
+      redirect_to subbludits_path
+    end
+  end
+
+  private
+
+  def approved_params
+    params.require(:subbludit).permit(:name)
+  end
+
 end

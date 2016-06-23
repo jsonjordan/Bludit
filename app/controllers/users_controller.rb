@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, except: [:destroy, :index, :edit]
+  before_action :set_user, except: [:destroy, :index, :edit, :update]
 
   def show
     authorize @user
@@ -7,17 +7,20 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    authorize @users
   end
 
   def edit
-    raise
+    @user = User.find params[:id]
+    authorize @user
   end
 
   def update
+    @user = User.find params[:id]
     authorize @user
     if @user.update approved_params
-      flash[:notice] = "Screen name updated!"
-      redirect_to @user
+      flash[:notice] = "User was updated!"
+      redirect_to users_path
     else
       render :edit
     end
@@ -28,10 +31,10 @@ class UsersController < ApplicationController
     authorize @user
     if @user.delete
       flash[:notice] = "User deleted!"
-      render :index
+      redirect_to :index
     else
       flash[:notice] = "Could not delete User!"
-      render :index
+      redirect_to :index
     end
   end
 
@@ -48,6 +51,6 @@ class UsersController < ApplicationController
   end
 
   def approved_params
-    params.require(:user).permit(:name)
+    params.require(:user).permit(:name, :email, :permission)
   end
 end

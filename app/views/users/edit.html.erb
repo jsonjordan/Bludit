@@ -1,0 +1,7 @@
+<h4>Edit <%= @user.name %>'s Account</h4>
+<%= bootstrap_form_for @user, url: user_path, method: :patch do |f| %>
+  <%= f.text_field :name %>
+  <%= f.email_field :email %>
+  <%= f.text_field :permission %>
+  <button class="btn btn-primary">Submit</button>
+<% end %>

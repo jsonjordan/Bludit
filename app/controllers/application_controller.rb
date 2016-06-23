@@ -10,6 +10,11 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   protect_from_forgery with: :exception
 
+  rescue_from Pundit::NotAuthorizedError do |e|
+    flash[:danger] = "Not Authorized!"
+    redirect_to "/"
+  end
+
   protected
 
   def configure_permitted_parameters
