@@ -18,6 +18,8 @@ class UserPolicy < ApplicationPolicy
   private
 
   def is_admin?
-    user.admin?
+    unless user.nil?
+      user.admin?
+    end
   end
 end

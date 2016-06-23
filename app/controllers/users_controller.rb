@@ -31,10 +31,10 @@ class UsersController < ApplicationController
     authorize @user
     if @user.delete
       flash[:notice] = "User deleted!"
-      redirect_to :index
+      redirect_to users_path
     else
       flash[:notice] = "Could not delete User!"
-      redirect_to :index
+      redirect_to users_path
     end
   end
 
