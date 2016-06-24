@@ -15,6 +15,7 @@ class SubbluditsController < ApplicationController
     @sub = Subbludit.new(name: params[:subbludit][:name])
     authorize @sub
     if @sub.save
+      Moderator.create!(subbludit_id: @sub.id, user_id: current_user.id)
       flash[:notice] = "Subbludit created!"
       redirect_to @sub
     else
