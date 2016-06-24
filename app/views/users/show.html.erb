@@ -13,11 +13,22 @@
   <%= link_to "Change your info", edit_user_registration_path, class: "list-group-item"  %>
   <%= link_to "Change your user picture", "/users/picture", class: "list-group-item"  %>
 </div>
-
 <div>
   <ul>
   </ul>
 </div>
+<% if @user.subbludits %>
+  <p>You are a moderator of:&emsp;<font color="blue">
+    <% @user.subbludits.each do |board| %>
+      <%= link_to "#{board.name}", subbludit_path(board) %>&emsp;
+    <% end %>
+  </font>
+  </p>
+  <div>
+    <ul>
+    </ul>
+  </div>
+<% end %>
 <h4>Your Posts</h4>
 <% @user.messages.each do |mes| %>
   <div class="panel panel-default">
