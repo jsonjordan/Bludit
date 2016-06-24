@@ -31,7 +31,14 @@
   <tbody>
     <% @sub.messages.each do |mes| %>
       <tr>
-        <td><%= mes.title %> <span class="badge"><%= mes.comments.count %></span></td>
+        <td><%= mes.title %> <span class="label label-default"><%= mes.comments.count %> comments</span>
+          <% if mes.score > 0 %>
+            <span class="label" style="background-color:lime"><%= mes.score %></span>
+          <% end %>
+          <% if mes.score < 0 %>
+            <span class="label" style="background-color:red"><%= mes.score.abs %></span>
+          <% end %>
+        </td>
         <td><%= mes.user.name ||= mes.user.email %></td>
         <td>
           <%= link_to "Read", message_path(mes), class: "btn btn-default btn-xs" %>

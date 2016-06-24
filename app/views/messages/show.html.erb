@@ -5,7 +5,24 @@
 </div>
 <h3>Post</h3>
 <div class="panel panel-default">
-  <div class="panel-heading">Title: <%= @post.title %></div>
+  <div class="panel-heading">Title: <%= @post.title %>
+    <div style="float: right;">
+      <td><%=@post.get_upvotes.size%>
+        <%= link_to like_message_path(@post), method: :put do %>
+        <span style="color:lime">
+          <i class="glyphicon glyphicon-chevron-up"></i>
+        </span>
+        <% end %>
+      </td>
+      <td><%=@post.get_downvotes.size%>
+        <%= link_to dislike_message_path(@post), method: :put do %>
+        <span style="color:red">
+          <i class="glyphicon glyphicon-chevron-down"></i>
+        </span>
+        <% end %>
+      </td>
+    </div>
+  </div>
   <div class="panel-body">Content: <%= @post.content %></div>
   <div class="panel-footer"><font color="blue"><%= @post.user.name ||= @post.user.email %></font> posted on <%= (@post.updated_at.in_time_zone('Eastern Time (US & Canada)')).strftime("%B %-d %Y - %I:%M%p EST")%>
     <% if @post.user == current_user %>&emsp;

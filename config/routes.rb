@@ -67,8 +67,13 @@ Rails.application.routes.draw do
       resources :comments, shallow: true
     end
   end
-  resources :votes, except: [:index, :new, :edit, :show]
 
+  resources :messages do
+    member do
+      put "like", to: "messages#upvote"
+      put "dislike", to: "messages#downvote"
+    end
+  end
 
 
 end

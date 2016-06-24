@@ -1,6 +1,17 @@
 class MessagesController < ApplicationController
-  before_action :set_sub, except: [:destroy, :new, :edit, :update, :show]
+  before_action :set_sub, except: [:destroy, :new, :edit, :update, :show, :upvote, :downvote]
 
+  def upvote
+    @post = Message.find(params[:id])
+    @post.upvote_by current_user
+    redirect_to message_path(@post)
+  end
+
+  def downvote
+    @post = Message.find(params[:id])
+    @post.downvote_by current_user
+    redirect_to message_path(@post)
+  end
 
   def new
     @sub = Subbludit.find params[:subbludit_id]
