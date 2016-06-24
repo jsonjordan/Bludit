@@ -60,10 +60,6 @@ class MessagesController < ApplicationController
   end
 
   def approved_params
-    if params[:messages]
-      params.require(:messages).permit(:title, :content, :user_id)
-    else
-      params.require(:message).permit(:title, :content, :user_id)
-    end
+    params.require(:message).permit(:title, :content, :user_id)
   end
 end

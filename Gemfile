@@ -19,6 +19,7 @@ gem 'bootstrap_form'
 gem 'rails-erd'
 gem 'devise'
 gem 'pundit'
+gem 'binding_of_caller'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

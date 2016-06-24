@@ -10,7 +10,7 @@
   <div class="panel-footer"><font color="blue"><%= @post.user.name ||= @post.user.email %></font> posted on <%= (@post.updated_at.in_time_zone('Eastern Time (US & Canada)')).strftime("%B %-d %Y - %I:%M%p EST")%>
     <% if @post.user == current_user %>&emsp;
       <%= link_to "Edit Post", edit_message_path(@post.id), class: "btn btn-default"%>&emsp;
-      <%= link_to "Delete Post", message_path(@post.id), method: :delete, class: "btn btn-default"%>
+      <%= link_to "Delete Post", message_path(@post.id), method: :delete, class: "btn btn-danger"%>
     <% end %>
   </div>
 </div>
@@ -33,7 +33,7 @@
         <%= link_to "Edit", edit_comment_path(comm), class: "btn btn-default"%>&emsp;
       <% end %>
       <% if policy(comm).destroy? %>
-        <%= link_to "Delete", comment_path(comm), method: :delete, class: "btn btn-default"%>
+        <%= link_to "Delete", comment_path(comm), method: :delete, class: "btn btn-danger"%>
       <% end %>
     </p>
   </div>
