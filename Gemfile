@@ -20,6 +20,7 @@ gem 'rails-erd'
 gem 'devise'
 gem 'pundit'
 gem 'binding_of_caller'
+gem 'acts_as_votable', '~> 0.10.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

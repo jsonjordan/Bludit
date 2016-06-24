@@ -6,9 +6,10 @@ class User < ActiveRecord::Base
 
   has_many :messages
   has_many :comments
-  has_many :votes, dependent: :destroy
   has_many :moderators, dependent: :destroy
   has_many :subbludits, through: :moderators
+
+  acts_as_voter
 
   validates_presence_of :name
   validates_uniqueness_of :name
