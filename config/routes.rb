@@ -60,6 +60,8 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resources :moderators, except: [:show, :edit, :update]
+
   resources :subbludits do
     resources :messages, except: [:index], shallow: true do
       resources :comments, shallow: true

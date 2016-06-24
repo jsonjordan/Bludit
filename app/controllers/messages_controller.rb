@@ -20,13 +20,13 @@ class MessagesController < ApplicationController
   end
 
   def edit
-    @post = Messages.find(params[:id])
+    @post = Message.find(params[:id])
     @sub = @post.subbludit
     authorize @post
   end
 
   def update
-    @post = current_user.messages.find(params[:id])
+    @post = Message.find(params[:id])
     authorize @post
     if @post.update approved_params
       flash[:notice] = "Post updated!"
@@ -37,7 +37,7 @@ class MessagesController < ApplicationController
   end
 
   def destroy
-    @post = current_user.messages.find(params[:id])
+    @post = Message.find(params[:id])
     authorize @post
     if @post.delete
       flash[:notice] = "Post deleted!"

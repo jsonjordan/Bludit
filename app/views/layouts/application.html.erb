@@ -57,6 +57,12 @@
           </ul>
           <ul class="nav navbar-nav pull-right">
             <% if policy(:user).index? %>
+             <li><%= link_to 'Admin Tools:', '/'%></li>
+            <% end %>
+            <% if policy(:moderator).index? %>
+              <li><%= link_to 'Mod List', moderators_path%></li>
+            <% end %>
+            <% if policy(:user).index? %>
               <li><%= link_to 'User List', users_path%></li>
             <% end %>
           </ul>
@@ -83,7 +89,7 @@
       </div><!--/row-->
 
       <footer>
-        <p>&copy; Aardwolves Assemble 2016</p>
+        <p>&copy; Aardwolves Assemble Inc. 2016</p>
       </footer>
 
     </div> <!-- /container -->

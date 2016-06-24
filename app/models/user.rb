@@ -6,8 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :messages
   has_many :comments
-  has_many :votes
-  has_many :moderators
+  has_many :votes, dependent: :destroy
+  has_many :moderators, dependent: :destroy
   has_many :subbludits, through: :moderators
 
   validates_presence_of :name
@@ -16,4 +16,5 @@ class User < ActiveRecord::Base
   def admin?
     self.permission == "admin"
   end
+
 end

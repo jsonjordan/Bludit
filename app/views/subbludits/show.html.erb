@@ -1,6 +1,9 @@
 <%= link_to "Back to Main", "/", class: "btn btn-default"%>
 
 <h3><%= @sub.name %> Sub<font color="blue">blu</font>dit</h3>
+<p>Moderators:  <% @sub.moderators.each do |mod| %>
+                  <font color="blue"><%= mod.user.name %>&emsp;</font>
+                <% end %>
 
 <h4>
   Current Posts
@@ -32,8 +35,10 @@
         <td><%= mes.user.name ||= mes.user.email %></td>
         <td>
           <%= link_to "Read", message_path(mes), class: "btn btn-default btn-xs" %>
-          <% if mes.user == current_user %>&emsp;
+          <% if policy(mes).update? %>&emsp;
             <%= link_to "Edit", edit_message_path(mes.id), class: "btn btn-default btn-xs"%>&emsp;
+          <% end %>
+          <% if policy(mes).destroy? %>&emsp;
             <%= link_to "Delete", message_path(mes.id), method: :delete, class: "btn btn-default btn-xs"%>
           <% end %>
         </td>

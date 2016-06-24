@@ -28,6 +28,12 @@
           <% if policy(:subbludit).destroy? %>
             <%= link_to 'Delete', subbludit_path(sub), method: :delete, class: "btn btn-default btn-xs" %>
           <% end %>
+          <% if policy(:moderator).create? %>
+            <%= bootstrap_form_for sub, url: new_moderator_path, method: :get do |f| %>
+              <%= f.hidden_field :subbludit_id, value: sub.id %>
+              <button class="btn btn-default btn-xs">Assign Mod</button>
+            <% end %>
+          <% end %>
         </td>
       </tr>
     <% end %>

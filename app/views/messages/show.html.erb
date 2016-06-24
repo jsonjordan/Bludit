@@ -28,9 +28,12 @@
   <div class="well well-lg"><p><font color="blue"><%= comm.user.name ||= comm.user.email %></font> wrote:
     <br>"<%=comm.content%>"</p>
     <p align="right"><%=(comm.updated_at.in_time_zone('Eastern Time (US & Canada)')).strftime("%B %-d %Y - %I:%M%p EST")%></p>
-      <p align="center"><% if comm.user == current_user %>&emsp;
-        <%= link_to "Edit Comment", edit_comment_path(comm), class: "btn btn-default btn-sm"%>&emsp;
-        <%= link_to "Delete Comment", comment_path(comm), method: :delete, class: "btn btn-default btn-sm"%>
+    <p align="center">
+      <% if policy(comm).update? %>&emsp;
+        <%= link_to "Edit", edit_comment_path(comm), class: "btn btn-default"%>&emsp;
+      <% end %>
+      <% if policy(comm).destroy? %>
+        <%= link_to "Delete", comment_path(comm), method: :delete, class: "btn btn-default"%>
       <% end %>
     </p>
   </div>

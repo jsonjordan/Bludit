@@ -1,0 +1,7 @@
+<h1>Assign a new moderator for <%= @sub.name %></h1>
+
+<%= bootstrap_form_for @mod do |f| %>
+  <%= f.text_field :user %>
+  <%= f.hidden_field :subbludit_id, value: @sub.id %>
+  <button class="btn btn-primary">Assign</button>
+<% end %>

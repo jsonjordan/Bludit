@@ -2,14 +2,14 @@ class CommentsController < ApplicationController
   before_action :set_post, except: [:edit, :update, :destroy]
 
   def new
-    @comm = @post.user.comments.new
+    @comm = @post.comments.new(user_id: current_user.id)
     authorize @comm
   end
 
   def create
     @comm = @post.comments.new approved_params
     authorize @comm
-    if @post.save
+    if @comm.save
       flash[:notice] = "Comment created!"
       redirect_to @post
     else
