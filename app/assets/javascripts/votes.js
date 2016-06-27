@@ -1,4 +1,4 @@
-
+var logs = {};
 //
 //
 //
@@ -26,11 +26,15 @@
 // }
 
 $(document).ready(function() {
+  if (localStorage.score) {
+    var score = parseInt(localStorage.score);
+  } else {
+    var score = parseInt(count);
+  }
 
-  var score = parseInt(count);
   var init = parseInt(count);
 
-
+  var logs = [];
 
   var computeVoteCount = function(change){
 
@@ -48,11 +52,18 @@ $(document).ready(function() {
     }
 
     votes.text( (score) )
+    localStorage.score = score;
   }
 
   var resetVoteCount = function(){
 
     score = init
+  }
+
+  var resetLogs = function(){
+
+    logs = []
+
   }
 
 
@@ -87,6 +98,10 @@ $(document).ready(function() {
 
     var voteCount = contents.text()
 
+    logs.push("Reset from " + voteCount + " at " + time + " on " + date)
+
+    console.log(logs)
+
     var item = $("<li class='record'>")
     item.append( $("<span>").text("Reset from " + voteCount + " at " + time + " on " + date ))
 
@@ -101,6 +116,11 @@ $(document).ready(function() {
   $("#clear-logs").click(function() {
     var items = $(".record")
     items.remove()
+    // items.empty()
+
+    localStorage.logs = logs
+
+    resetLogs()
   })
 
   computeVoteCount(0)
