@@ -1,0 +1,23 @@
+<script>
+  var count = "<%= @count %>";
+</script>
+
+<div id="new-vote">
+  <button class="btn btn-success btn-xs" id="up-vote" value=1>
+    <i class="glyphicon glyphicon-chevron-up"></i>
+  </button>
+
+  <class id="votes"></class>
+
+  <button class="btn btn-danger btn-xs" id="down-vote" value=-1>
+    <i class="glyphicon glyphicon-chevron-down"></i>
+  </button>
+
+  &emsp;<button class="btn btn-info btn-xs" id="reset">Reset</button>
+  <p></p>
+  <ul class="vote-list">
+    <ut>Logs:&emsp;
+    <button class="btn btn-warning btn-xs" id="clear-logs">Clear Logs</button>
+    </ut>
+  </ul>
+</div>
