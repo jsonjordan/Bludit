@@ -37,13 +37,9 @@ $(document).ready(function() {
     var score = init;
   }
 
-  var computeVoteCount = function(change){
+  var computeVoteCount = function(){
 
     var votes = $("#votes")
-
-    change = parseInt(change)
-
-    score += change
 
     if (score > 10) {
       votes.addClass("overTen")
@@ -69,24 +65,18 @@ $(document).ready(function() {
 
 
   $("#up-vote").click(function() {
-    console.log("up vote clicked")
 
-    contents = $("#up-vote")
+    score += 1
 
-    vote = contents.val()
-
-    computeVoteCount(vote)
+    computeVoteCount()
 
   })
 
   $("#down-vote").click(function() {
-    console.log("down vote clicked")
 
-    contents = $("#down-vote")
+    score -= 1
 
-    vote = contents.val()
-
-    computeVoteCount(vote)
+    computeVoteCount()
   })
 
   $("#reset").click(function() {
@@ -95,21 +85,15 @@ $(document).ready(function() {
     var date = now.toLocaleDateString();
     var time = now.toLocaleTimeString();
 
-    var contents = $("#votes")
-
-    var voteCount = contents.text()
-
-    logs.push("Reset from " + voteCount + " at " + time + " on " + date)
-
-    console.log(logs)
+    logs.push("Reset from " + score + " at " + time + " on " + date)
 
     var item = $("<li class='record'>")
-    item.append( $("<span>").text("Reset from " + voteCount + " at " + time + " on " + date ))
+    item.append( $("<span>").text("Reset from " + score + " at " + time + " on " + date ))
 
     $(".vote-list").prepend( item )
 
     resetVoteCount()
-    computeVoteCount(0)
+    computeVoteCount()
 
 
   })
@@ -124,6 +108,6 @@ $(document).ready(function() {
     resetLogs()
   })
 
-  computeVoteCount(0)
+  computeVoteCount()
 
 })
