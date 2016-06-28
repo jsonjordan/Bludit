@@ -1,4 +1,4 @@
-var logs = {};
+
 //
 //
 //
@@ -47,7 +47,7 @@ $(document).ready(function() {
     if (score > 10) {
       votes.addClass("overTen")
     }
-    if ((score <= 10) && (votes.hasClass("overTen"))){
+    if (score <= 10){
       votes.removeClass("overTen")
     }
 
