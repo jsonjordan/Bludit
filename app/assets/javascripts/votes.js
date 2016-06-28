@@ -26,15 +26,16 @@
 // }
 
 $(document).ready(function() {
-  if (localStorage.score) {
-    var score = parseInt(localStorage.score);
-  } else {
-    var score = parseInt(count);
-  }
 
   var init = parseInt(count);
 
   var logs = [];
+
+  if (localStorage.score) {
+    var score = parseInt(localStorage.score);
+  } else {
+    var score = init;
+  }
 
   var computeVoteCount = function(change){
 
