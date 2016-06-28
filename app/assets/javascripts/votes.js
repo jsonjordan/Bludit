@@ -1,43 +1,29 @@
-
-//
-//
-//
-// var computeVoteCount = function(change){
-//
-//   var votes = $("#votes")
-//
-//   change = parseInt(change)
-//
-//   score += change
-//
-//   if (score > 10) {
-//     votes.addClass("overTen")
-//   }
-//   if ((score <= 10) && (votes.hasClass("overTen"))){
-//     votes.removeClass("overTen")
-//   }
-//
-//   votes.text( (score) )
-// }
-//
-// var resetVoteCount = function(){
-//
-//   score = init
-// }
-
 $(document).ready(function() {
 
-  var init = parseInt(count);
-
   var logs = [];
+  var score;
 
-  if (localStorage.score) {
-    var score = parseInt(localStorage.score);
-  } else {
-    var score = init;
+  // if (localStorage.score) {
+  //   var score = parseInt(localStorage.score);
+  // } else {
+  //   getVotes()
+  // }
+
+  var getVotes = function(){
+    $.ajax("/sandboxes/1/votecount.json", {
+      success: function(data) {
+        console.log(data)
+        score = data.count
+
+        displayVotes()
+
+      },
+      error: function() { alert("Cant get vote count!") }
+    })
+
   }
 
-  var computeVoteCount = function(){
+  var displayVotes = function(){
 
     var votes = $("#votes")
 
@@ -54,7 +40,14 @@ $(document).ready(function() {
 
   var resetVoteCount = function(){
 
-    score = init
+    $.ajax("/sandboxes/1/reset.json", {
+      method: "PATCH",
+      success: function(data) {
+        alert(data.message)
+        getVotes()
+       },
+      error: function() { alert("Something went wrong!") }
+    })
   }
 
   var resetLogs = function(){
@@ -66,17 +59,26 @@ $(document).ready(function() {
 
   $("#up-vote").click(function() {
 
-    score += 1
-
-    computeVoteCount()
+    $.ajax("/sandboxes/1/like.json", {
+      method: "PUT",
+      success: function() {
+        getVotes() },
+      error: function() { alert("No upvotes for you!") }
+    })
 
   })
 
   $("#down-vote").click(function() {
 
-    score -= 1
+    $.ajax("/sandboxes/1/dislike.json", {
+      method: "PUT",
+      success: function() {
+        alert("Vote Posted!")
+        getVotes()
+      },
+      error: function() { alert("go downvote yourself!") }
+    })
 
-    computeVoteCount()
   })
 
   $("#reset").click(function() {
@@ -93,8 +95,6 @@ $(document).ready(function() {
     $(".vote-list").prepend( item )
 
     resetVoteCount()
-    computeVoteCount()
-
 
   })
 
@@ -108,6 +108,7 @@ $(document).ready(function() {
     resetLogs()
   })
 
-  computeVoteCount()
+  getVotes()
+
 
 })

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160624184919) do
+ActiveRecord::Schema.define(version: 20160628170533) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
@@ -44,6 +44,11 @@ ActiveRecord::Schema.define(version: 20160624184919) do
 
   add_index "moderators", ["subbludit_id"], name: "index_moderators_on_subbludit_id"
   add_index "moderators", ["user_id"], name: "index_moderators_on_user_id"
+
+  create_table "sandboxes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "subbludits", force: :cascade do |t|
     t.string   "name"

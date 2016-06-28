@@ -3,12 +3,14 @@ class MessagesController < ApplicationController
 
   def upvote
     @post = Message.find(params[:id])
+    authorize current_user
     @post.upvote_by current_user
     redirect_to message_path(@post)
   end
 
   def downvote
     @post = Message.find(params[:id])
+    authorize current_user
     @post.downvote_by current_user
     redirect_to message_path(@post)
   end
