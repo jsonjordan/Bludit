@@ -34,9 +34,13 @@ class SandboxesController < ApplicationController
   end
 
   def reset
-    # sb = Sandbox.first
+    sb = Sandbox.first
     # act as votable doesnt have a reset function
     # looking for a work around
+    # sb-up = PublicActivity::Activity.where(trackable_id: sb.id, owner_id: current_user.id, key: "post.like")
+    # sb_up.destroy_all
+    # sb-down = PublicActivity::Activity.where(trackable_id: sb.id, owner_id: current_user.id, key: "post.dislike")
+    # sb_down.destroy_all
     message = "Not implemented yet"
     respond_to do |format|
       format.html { redirect_to :back, notice: message}

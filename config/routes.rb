@@ -76,7 +76,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :sandboxes do
+  resources :sandboxes, only: [] do
     member do
       put "like", to: "sandboxes#upvote"
       put "dislike", to: "sandboxes#downvote"

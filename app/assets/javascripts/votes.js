@@ -12,7 +12,6 @@ $(document).ready(function() {
   var getVotes = function(){
     $.ajax("/sandboxes/1/votecount.json", {
       success: function(data) {
-        console.log(data)
         score = data.count
 
         displayVotes()
@@ -73,7 +72,6 @@ $(document).ready(function() {
     $.ajax("/sandboxes/1/dislike.json", {
       method: "PUT",
       success: function() {
-        alert("Vote Posted!")
         getVotes()
       },
       error: function() { alert("go downvote yourself!") }
